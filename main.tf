@@ -345,9 +345,10 @@ resource "aws_subnet" "public" {
   tags = merge(
     {
       "Name" = format(
-        "%s-${var.public_subnet_suffix}-%s",
+        "%s-${var.public_subnet_suffix}-%s-%s",
         var.name,
         element(var.azs, count.index),
+        element(concat(var.public_subnets, [""]), count.index),
       )
     },
     var.tags,
