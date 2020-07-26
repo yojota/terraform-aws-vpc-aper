@@ -401,9 +401,10 @@ resource "aws_subnet" "database" {
   tags = merge(
     {
       "Name" = format(
-        "%s-${var.database_subnet_suffix}-%s",
+        "%s-${var.database_subnet_suffix}-%s-%s",
         var.name,
         element(var.azs, count.index),
+        var.database_subnets[count.index],
       )
     },
     var.tags,
